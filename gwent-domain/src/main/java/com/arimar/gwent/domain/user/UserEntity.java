@@ -1,26 +1,23 @@
 package com.arimar.gwent.domain.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.Instant;
+import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "gw_user")
 public class UserEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+    private UUID userId;
 
     @Column(name = "username")
     private String username;
@@ -34,7 +31,19 @@ public class UserEntity {
     @Column(name = "game_id")
     private String gameId;
 
-    @Column(name = "user_code")
-    private String userCode;
+    @Column(name = "user_tag")
+    private String tag;
 
+    @Column(name = "created_at")
+    private Instant createdAt;
+
+    @PrePersist
+    void onCreate() {
+        if (userId == null) {
+            userId = UUID.randomUUID();
+        }
+        if (createdAt == null){
+            createdAt = Instant.now();
+        }
+    }
 }
