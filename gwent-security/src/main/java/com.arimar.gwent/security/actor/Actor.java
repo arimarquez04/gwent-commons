@@ -8,8 +8,9 @@ import java.util.UUID;
 @Builder
 @Data
 public class Actor {
-    private UUID playerId;
-    private String username;
+    private UUID userId;
     private String gameId;
+    private String username;
     private String tag;
+
 }

@@ -4,37 +4,39 @@
   <parent>
     <groupId>com.arimar.gwent</groupId>
     <artifactId>gwent-commons</artifactId>
-    <version>0.6.0</version>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>gwent-domain</artifactId>
-  <version>0.6.0</version>
   <packaging>jar</packaging>
 
   <dependencies>
+
+    <!-- JPA annotations (@Entity, @Id, etc.) -->
     <dependency>
       <groupId>jakarta.persistence</groupId>
       <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.1.0</version>
     </dependency>
 
+    <!-- Bean Validation annotations (@NotNull, @Size, etc.) -->
     <dependency>
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
-      <version>3.1.0</version>
     </dependency>
 
+    <!-- Jackson annotations (por si usás @JsonIgnore, etc.) -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>2.19.2</version>
-      <scope>compile</scope>
     </dependency>
 
+    <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.38</version>
+      <scope>provided</scope>
     </dependency>
+
   </dependencies>
 </project>

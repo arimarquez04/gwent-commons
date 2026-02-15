@@ -5,25 +5,70 @@
 
   <groupId>com.arimar.gwent</groupId>
   <artifactId>gwent-commons</artifactId>
-  <version>0.6.0</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
+
+  <properties>
+    <!-- ÚNICA versión para todos los módulos -->
+    <revision>0.10.0</revision>
+
+    <java.version>21</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- versiones externas (BOM) -->
+    <spring.boot.version>3.5.4</spring.boot.version>
+
+    <!-- versiones puntuales que querés controlar -->
+    <springdoc.version>2.8.0</springdoc.version>
+    <lombok.version>1.18.38</lombok.version>
+    <slf4j.version>2.0.17</slf4j.version>
+    <jakarta.validation.api.version>3.1.0</jakarta.validation.api.version>
+  </properties>
 
   <modules>
     <module>gwent-common</module>
     <module>gwent-contracts</module>
     <module>gwent-domain</module>
     <module>gwent-security</module>
+    <module>gwent-communication</module>
   </modules>
 
-  <properties>
-    <java.version>21</java.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.boot.version>3.5.4</spring.boot.version>
-
-  </properties>
   <dependencyManagement>
     <dependencies>
+
+      <!-- Internal modules (versionados todos con la misma revision) -->
+      <dependency>
+        <groupId>com.arimar.gwent</groupId>
+        <artifactId>gwent-common</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.arimar.gwent</groupId>
+        <artifactId>gwent-contracts</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.arimar.gwent</groupId>
+        <artifactId>gwent-domain</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.arimar.gwent</groupId>
+        <artifactId>gwent-security</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.arimar.gwent</groupId>
+        <artifactId>gwent-communication</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <!-- BOM Spring Boot: te evita definir versiones de starters -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -31,6 +76,63 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!-- (Opcional) fijar versiones puntuales acá para que hijos NO pongan <version> -->
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${springdoc.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>${jakarta.validation.api.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <!-- Reescribe el pom "instalado/deployado" resolviendo ${revision} -->
+          <updatePomFile>true</updatePomFile>
+          <!-- Solo resuelve ${revision}, ${sha1}, etc. (CI-friendly) -->
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten-clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
