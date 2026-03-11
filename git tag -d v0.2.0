@@ -1,0 +1,64 @@
+[33mtag v0.2.0[m
+Tagger: Arielito <arimarquez2444@gmail.com>
+Date:   Sat Jan 31 21:20:07 2026 -0300
+
+Release 0.2.0
+
+[33mcommit 2f29ee66dbf21648ec5bfe356f3e4c6549488b8c[m[33m ([m[1;33mtag: [m[1;33mv0.2.0[m[33m)[m
+Author: Arielito <arimarquez2444@gmail.com>
+Date:   Sat Jan 31 21:19:56 2026 -0300
+
+    chore(release): 0.2.0
+
+[1mdiff --git a/gwent-common/pom.xml b/gwent-common/pom.xml[m
+[1mindex 54e0732..e01f23d 100644[m
+[1m--- a/gwent-common/pom.xml[m
+[1m+++ b/gwent-common/pom.xml[m
+[36m@@ -4,7 +4,7 @@[m
+   <parent>[m
+     <groupId>com.arimar.gwent</groupId>[m
+     <artifactId>gwent-commons</artifactId>[m
+[31m-    <version>0.1.0</version>[m
+[32m+[m[32m    <version>1.0.0</version>[m
+   </parent>[m
+ [m
+   <artifactId>gwent-common</artifactId>[m
+[1mdiff --git a/gwent-contracts/pom.xml b/gwent-contracts/pom.xml[m
+[1mindex 56462fa..1e4ea4d 100644[m
+[1m--- a/gwent-contracts/pom.xml[m
+[1m+++ b/gwent-contracts/pom.xml[m
+[36m@@ -4,7 +4,7 @@[m
+   <parent>[m
+     <groupId>com.arimar.gwent</groupId>[m
+     <artifactId>gwent-commons</artifactId>[m
+[31m-    <version>0.1.0</version>[m
+[32m+[m[32m    <version>1.0.0</version>[m
+   </parent>[m
+ [m
+   <artifactId>gwent-contracts</artifactId>[m
+[1mdiff --git a/gwent-domain/pom.xml b/gwent-domain/pom.xml[m
+[1mindex 6b89b3d..c07e44f 100644[m
+[1m--- a/gwent-domain/pom.xml[m
+[1m+++ b/gwent-domain/pom.xml[m
+[36m@@ -4,7 +4,7 @@[m
+   <parent>[m
+     <groupId>com.arimar.gwent</groupId>[m
+     <artifactId>gwent-commons</artifactId>[m
+[31m-    <version>0.1.0</version>[m
+[32m+[m[32m    <version>1.0.0</version>[m
+   </parent>[m
+ [m
+   <artifactId>gwent-domain</artifactId>[m
+[1mdiff --git a/pom.xml b/pom.xml[m
+[1mindex b644fd2..bce0837 100644[m
+[1m--- a/pom.xml[m
+[1m+++ b/pom.xml[m
+[36m@@ -5,7 +5,7 @@[m
+ [m
+   <groupId>com.arimar.gwent</groupId>[m
+   <artifactId>gwent-commons</artifactId>[m
+[31m-  <version>0.1.0</version>[m
+[32m+[m[32m  <version>1.0.0</version>[m
+   <packaging>pom</packaging>[m
+ [m
+   <modules>[m
